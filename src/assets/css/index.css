@@ -1,3 +1,5 @@
+/* large sprite */
+/* medium sprite */
 body {
   margin: 0;
   padding: 0;
@@ -11,11 +13,11 @@ div.touchpad {
 }
 div.touchpad.touchpad-up, div.touchpad.touchpad-down {
   width: 50vw;
-  height: calc((100vh - 168px) / 2);
+  height: calc((100vh - 112px) / 2);
   z-index: 1;
 }
 div.touchpad.touchpad-left, div.touchpad.touchpad-right {
-  width: calc((100vw - 96px) / 2);
+  width: calc((100vw - 64px) / 2);
   height: 100vh;
 }
 div.touchpad.touchpad-up {
@@ -36,29 +38,29 @@ div.touchpad.touchpad-right {
 }
 
 div#madotsuki {
-  width: 96px;
-  height: 168px;
-  margin: calc((100vh - 168px) / 2) auto;
-  background-image: url("../graphics/sprites/96x168.png");
+  width: 64px;
+  height: 112px;
+  margin: calc((100vh - 112px) / 2) auto;
+  background-image: url("../graphics/sprites/64x112.png");
 }
 div#madotsuki.facing-down {
   background-position-y: 0;
 }
 div#madotsuki.facing-left {
-  background-position-y: -168px;
+  background-position-y: -112px;
 }
 div#madotsuki.facing-up {
-  background-position-y: -336px;
+  background-position-y: -224px;
 }
 div#madotsuki.facing-right {
-  background-position-y: -504px;
+  background-position-y: -336px;
 }
 div#madotsuki.still {
   background-position-x: 0;
 }
 div#madotsuki.left-step {
-  background-position-x: -96px;
+  background-position-x: -64px;
 }
 div#madotsuki.right-step {
-  background-position-x: -192px;
+  background-position-x: -128px;
 }
