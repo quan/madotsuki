@@ -32,10 +32,38 @@ class Madotsuki extends React.Component {
    * Creates a timed step interval function for the walking animation and returns it.
    */
   startWalking () {
-    const stepTime = 300 // ms
-    let steps = 0
+    const PIXELS_PER_STEP = 30
+    const STEP_TIME = 300 // ms
+    let steps = -1
     let stepInterval = window.setInterval(() => {
       console.log('steppin')
+      const background = $('div.background')
+      const currentX = parseInt(background.css('backgroundPositionX'), 10)
+      const currentY = parseInt(background.css('backgroundPositionY'), 10)
+      let newX, newY
+      switch (this.state.direction) {
+        case 'left':
+          newX = (currentX + PIXELS_PER_STEP) + 'px'
+          newY = currentY + 'px'
+          break
+        case 'up':
+          newX = currentX + 'px'
+          newY = (currentY + PIXELS_PER_STEP) + 'px'
+          break
+        case 'right':
+          newX = (currentX - PIXELS_PER_STEP) + 'px'
+          newY = currentY + 'px'
+          break
+        case 'down':
+          newX = currentX + 'px'
+          newY = (currentY - PIXELS_PER_STEP) + 'px'
+          break
+      }
+      background.animate({
+        'backgroundPositionX': newX,
+        'backgroundPositionY': newY
+      }, STEP_TIME)
+
       switch (++steps % 4) {
         case 0: // left
           this.setState({step: 'left'})
@@ -47,7 +75,7 @@ class Madotsuki extends React.Component {
           this.setState({step: 'mid'})
           break
       }
-    }, stepTime)
+    }, STEP_TIME)
 
     return stepInterval
   }
@@ -66,7 +94,7 @@ class Madotsuki extends React.Component {
     this.setState({
       direction: direction,
       walking: true,
-      step: 'left'
+      step: 'mid'
     })
   }
 
@@ -87,22 +115,18 @@ class Madotsuki extends React.Component {
   }
 
   componentDidMount () {
-    const screen = $(window)
-    // const madotsuki = $('#madotsuki')
-
     // set listener for walking via keyboard
-    screen.keydown((event) => this.handleKeyDown(event))
+    $(window).keydown((event) => this.handleKeyDown(event))
 
     // set listeners for walking via touchpads
     for (let direction of ['down', 'left', 'up', 'right']) {
-      console.log('creating listener for ' + direction + ' mousedown')
       $('.touchpad-' + direction).on('mousedown touchstart', (event) => {
         if (!this.state.walking) {
           // turn and start walking
           this.turn(direction)
           let stepInterval = this.startWalking()
           // stop walking on mouse up
-          screen.on('mouseup touchend', (event) => {
+          $(window).on('mouseup touchend', (event) => {
             this.stopWalking(stepInterval, 'mouseup touchend')
           })
         }

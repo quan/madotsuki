@@ -8,6 +8,19 @@ body {
   overflow-y: hidden;
 }
 
+div.container {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+div.background {
+  background: url("../graphics/grass_128.png");
+  background-position-x: 0px;
+  background-position-y: 0px;
+}
+
 div.touchpad {
   position: fixed;
 }

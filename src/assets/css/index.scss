@@ -7,13 +7,16 @@ $font-stack: sans-serif;
 // $image-height: 672px;
 
 /* medium sprite */
-$sprite-url: url('../graphics/sprites/64x112.png');
+$sprite-image: url('../graphics/sprites/64x112.png');
 $image-width: 192px;
 $image-height: 448px;
+
 $sprite-cols: 3;
 $sprite-rows: 4;
 $sprite-width: $image-width / $sprite-cols;
 $sprite-height: $image-height / $sprite-rows;
+
+$background-image: url('../graphics/grass_128.png');
 
 body {
   margin: 0;
@@ -21,6 +24,19 @@ body {
   font-family: $font-stack;
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+div.container {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+div.background {
+  background: $background-image;
+  background-position-x: 0px;
+  background-position-y: 0px;
 }
 
 div.touchpad {
@@ -48,7 +64,7 @@ div#madotsuki {
   width: $sprite-width;
   height: $sprite-height;
   margin: calc((100vh - #{$sprite-height}) / 2) auto;
-  background-image: $sprite-url;
+  background-image: $sprite-image;
 
   &.facing-down { background-position-y: 0; }
   &.facing-left { background-position-y: -$sprite-height; }
