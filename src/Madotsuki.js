@@ -95,15 +95,15 @@ class Madotsuki extends React.Component {
 
     // set listeners for walking via touchpads
     for (let direction of ['down', 'left', 'up', 'right']) {
-      console.log('creating listened for ' + direction + ' mousedown')
-      $('.touchpad-' + direction).mousedown((event) => {
+      console.log('creating listener for ' + direction + ' mousedown')
+      $('.touchpad-' + direction).on('mousedown touchstart', (event) => {
         if (!this.state.walking) {
           // turn and start walking
           this.turn(direction)
           let stepInterval = this.startWalking()
           // stop walking on mouse up
-          screen.on('mouseup', (event) => {
-            this.stopWalking(stepInterval, 'mouseup')
+          screen.on('mouseup touchend', (event) => {
+            this.stopWalking(stepInterval, 'mouseup touchend')
           })
         }
       })
