@@ -2,7 +2,37 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overflow-x: hidden;
   overflow-y: hidden;
+}
+
+div.touchpad {
+  position: fixed;
+}
+div.touchpad.touchpad-up, div.touchpad.touchpad-down {
+  width: 50vw;
+  height: calc((100vh - 168px) / 2);
+  z-index: 1;
+}
+div.touchpad.touchpad-left, div.touchpad.touchpad-right {
+  width: calc((100vw - 96px) / 2);
+  height: 100vh;
+}
+div.touchpad.touchpad-up {
+  top: 0;
+  left: 25vw;
+}
+div.touchpad.touchpad-left {
+  top: 0;
+  left: 0;
+}
+div.touchpad.touchpad-down {
+  bottom: 0;
+  left: 25vw;
+}
+div.touchpad.touchpad-right {
+  top: 0;
+  right: 0;
 }
 
 div#madotsuki {

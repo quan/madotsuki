@@ -2,14 +2,14 @@ import React from 'react'
 import Madotsuki from './Madotsuki.js'
 
 class App extends React.Component {
-  handleKeyDown () {
-    console.log('wat')
-  }
-
   render () {
     return (
-      <div className='App' onKeyDown={this.handleKeyDown}>
+      <div className='App'>
+        <div className='touchpad touchpad-up' />
+        <div className='touchpad touchpad-left' />
         <Madotsuki />
+        <div className='touchpad touchpad-right' />
+        <div className='touchpad touchpad-down' />
       </div>
     )
   }

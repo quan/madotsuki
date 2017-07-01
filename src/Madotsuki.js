@@ -28,37 +28,59 @@ class Madotsuki extends React.Component {
     }
   }
 
-  turn (direction) {
+  /**
+   * Creates a timed step interval function for the walking animation and returns it.
+   */
+  startWalking () {
+    const stepTime = 300 // ms
+    let steps = 0
+    let stepInterval = window.setInterval(() => {
+      console.log('steppin')
+      switch (++steps % 4) {
+        case 0: // left
+          this.setState({step: 'left'})
+          break
+        case 2: // right
+          this.setState({step: 'right'})
+          break
+        default: // mid
+          this.setState({step: 'mid'})
+          break
+      }
+    }, stepTime)
+
+    return stepInterval
   }
 
-  walk () {
-    console.log('walking')
+  /**
+   * Clears the given interval interval function for the given event.
+   */
+  stopWalking (stepInterval, event) {
+    window.clearInterval(stepInterval)
+    this.setState({walking: false})
 
-    const stepTime = 300 // ms
-    let stepCount = 0
-    let stepInterval
+    $(window).off(event)
+  }
 
-    if (this.state.walking) {
-      stepInterval = window.setInterval(() => {
-        switch (++stepCount % 4) {
-          case 0: // left
-            this.setState({step: 'left'})
-            break
-          case 2: // right
-            this.setState({step: 'right'})
-            break
-          default: // mid
-            this.setState({step: 'mid'})
-            break
-        }
-      }, stepTime)
+  turn (direction) {
+    this.setState({
+      direction: direction,
+      walking: true,
+      step: 'left'
+    })
+  }
 
-      const screen = $(window)
+  handleKeyDown (event) {
+    const direction = this.keyToDirectionMap[event.key]
 
-      screen.keyup((event) => {
+    if (!this.state.walking && direction != null) {
+      // turn and start walking
+      this.turn(direction)
+      let stepInterval = this.startWalking()
+      // stop walking on key up
+      $(window).on('keyup', (event) => {
         if (this.keyToDirectionMap[event.key] === this.state.direction) {
-          window.clearInterval(stepInterval)
-          this.setState({walking: false})
+          this.stopWalking(stepInterval, 'keyup')
         }
       })
     }
@@ -68,21 +90,24 @@ class Madotsuki extends React.Component {
     const screen = $(window)
     // const madotsuki = $('#madotsuki')
 
-    // set listener for turning via keyboard
-    screen.keydown((event) => {
-      const direction = this.keyToDirectionMap[event.key]
+    // set listener for walking via keyboard
+    screen.keydown((event) => this.handleKeyDown(event))
 
-      if (!this.state.walking && direction != null) {
-        // turn
-        this.setState({
-          direction: direction,
-          walking: true,
-          step: 'left'
-        })
-
-        this.walk()
-      }
-    })
+    // set listeners for walking via touchpads
+    for (let direction of ['down', 'left', 'up', 'right']) {
+      console.log('creating listened for ' + direction + ' mousedown')
+      $('.touchpad-' + direction).mousedown((event) => {
+        if (!this.state.walking) {
+          // turn and start walking
+          this.turn(direction)
+          let stepInterval = this.startWalking()
+          // stop walking on mouse up
+          screen.on('mouseup', (event) => {
+            this.stopWalking(stepInterval, 'mouseup')
+          })
+        }
+      })
+    }
   }
 
   render () {
