@@ -1,0 +1,63 @@
+
+$font-stack: sans-serif;
+
+/* large sprite */
+// $sprite-url: url('../graphics/sprites/96x168.png');
+// $image-width: 288px;
+// $image-height: 672px;
+
+/* medium sprite */
+$sprite-url: url('../graphics/sprites/64x112.png');
+$image-width: 192px;
+$image-height: 448px;
+$sprite-cols: 3;
+$sprite-rows: 4;
+$sprite-width: $image-width / $sprite-cols;
+$sprite-height: $image-height / $sprite-rows;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-stack;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+div.touchpad {
+  position: fixed;
+
+  &.touchpad-up, &.touchpad-down {
+    width: 50vw;
+    height: calc((100vh - #{$sprite-height}) / 2);
+
+    z-index: 1;
+  }
+
+  &.touchpad-left, &.touchpad-right {
+    width: calc((100vw - #{$sprite-width}) / 2);
+    height: 100vh;
+  }
+
+  &.touchpad-up { top: 0; left: 25vw;}
+  &.touchpad-left { top: 0; left: 0; }
+  &.touchpad-down { bottom: 0; left: 25vw;}
+  &.touchpad-right { top: 0; right: 0; }
+}
+
+div#madotsuki {
+  width: $sprite-width;
+  height: $sprite-height;
+  margin: calc((100vh - #{$sprite-height}) / 2) auto;
+  background-image: $sprite-url;
+
+  &.facing-down { background-position-y: 0; }
+  &.facing-left { background-position-y: -$sprite-height; }
+  &.facing-up { background-position-y: -(2 * $sprite-height); }
+  &.facing-right { background-position-y: -(3 * $sprite-height); }
+
+
+  &.still { background-position-x: 0; }
+  &.left-step { background-position-x: -$sprite-width; }
+  &.right-step { background-position-x: -(2 * $sprite-width); }
+
+}
