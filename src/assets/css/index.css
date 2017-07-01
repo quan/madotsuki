@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow-y: hidden;
+}
+
+div#madotsuki {
+  width: 96px;
+  height: 168px;
+  margin: calc((100vh - 168px) / 2) auto;
+  background-image: url("../graphics/sprites/96x168.png");
+}
+div#madotsuki.facing-down {
+  background-position-y: 0;
+}
+div#madotsuki.facing-left {
+  background-position-y: -168px;
+}
+div#madotsuki.facing-up {
+  background-position-y: -336px;
+}
+div#madotsuki.facing-right {
+  background-position-y: -504px;
+}
+div#madotsuki.still {
+  background-position-x: 0;
+}
+div#madotsuki.left-step {
+  background-position-x: -96px;
+}
+div#madotsuki.right-step {
+  background-position-x: -192px;
+}
