@@ -58,6 +58,8 @@ class Madotsuki extends React.Component {
           newX = currentX + 'px'
           newY = (currentY - PIXELS_PER_STEP) + 'px'
           break
+        default:
+          break
       }
       background.animate({
         'backgroundPositionX': newX,
