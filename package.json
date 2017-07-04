@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://quan.github.io/madotsuki",
+  "repository" : {
+    "type" : "git"
+  , "url" : "https://github.com/quan/madotsuki.git"
+  },
   "dependencies": {
     "jquery": "^3.2.1",
     "react": "^15.6.1",
