@@ -32,8 +32,9 @@ class Madotsuki extends React.Component {
    * Creates a timed step interval function for the walking animation and returns it.
    */
   startWalking () {
+    // this is so hacky
     const PIXELS_PER_STEP = 30
-    const STEP_TIME = 300 // ms
+    const STEP_TIME = 200 // ms
     let steps = -1
     let stepInterval = window.setInterval(() => {
       console.log('steppin')
@@ -68,14 +69,11 @@ class Madotsuki extends React.Component {
 
       switch (++steps % 4) {
         case 0: // left
-          this.setState({step: 'left'})
-          break
+          this.setState({step: 'left'}); break
         case 2: // right
-          this.setState({step: 'right'})
-          break
+          this.setState({step: 'right'}); break
         default: // mid
-          this.setState({step: 'mid'})
-          break
+          this.setState({step: 'mid'}); break
       }
     }, STEP_TIME)
 
